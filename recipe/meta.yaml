@@ -15,7 +15,10 @@ build:
   noarch: python
   entry_points:
     - venv-kernel = venv_kernel.kernel_tool:app
-  script: {{ PYTHON }} -m pip install . -vv
+  script:
+    # Removing pyproject.toml here due to pip bug
+    - {{ PYTHON }} -c "__import__('os').unlink('pyproject.toml')"
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
