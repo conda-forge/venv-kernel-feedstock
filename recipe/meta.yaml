@@ -1,5 +1,5 @@
 {% set name = "venv-kernel" %}
-{% set version = "1.0.6" %}
+{% set version = "1.0.7" %}
 
 
 package:
@@ -8,14 +8,17 @@ package:
 
 source:
   url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/venv-kernel-{{ version }}.tar.gz
-  sha256: 6c889e19f551aae893f095c48f498694a0c77b56d85bd201c3ad35772fe0e13a
+  sha256: 96d74fc60d0b93baad2562c82a1a68bac8090ce3034520f53dd50e4bc5746542
 
 build:
   number: 0
   noarch: python
   entry_points:
     - venv-kernel = venv_kernel.kernel_tool:app
-  script: {{ PYTHON }} -m pip install . -vv
+  script:
+    # Removing pyproject.toml here due to pip bug
+    - {{ PYTHON }} -c "__import__('os').unlink('pyproject.toml')"
+    - {{ PYTHON }} -m pip install . -vv
 
 requirements:
   host:
