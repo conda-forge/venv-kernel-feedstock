@@ -1,5 +1,5 @@
 {% set name = "venv-kernel" %}
-{% set version = "1.0.7" %}
+{% set version = "1.0.10" %}
 
 
 package:
@@ -7,8 +7,8 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/venv-kernel-{{ version }}.tar.gz
-  sha256: 96d74fc60d0b93baad2562c82a1a68bac8090ce3034520f53dd50e4bc5746542
+  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
+  sha256: 926496ca024eae76d38d5491dd6210281b5365fb698b5f22d91449a131d7c842
 
 build:
   number: 0
