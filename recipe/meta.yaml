@@ -7,11 +7,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name.replace('-', '_') }}-{{ version }}.tar.gz
   sha256: 8aa0b63ac4dab2a967ae7c00ff6f91b9cfb67550c76408714aec52dcf81b5f11
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - venv-kernel = venv_kernel.kernel_tool:app
@@ -22,10 +22,10 @@ requirements:
   host:
     - pip
     - poetry-core >=1.0.0
-    - python >=3.6,<4.0
+    - python {{ python_min }}
   run:
     - ipykernel >=5.5,<7
-    - python >=3.6,<4.0
+    - python >={{ python_min }},<4.0
     - rich >=10.7
     - typer >=0.3.2
 
@@ -37,6 +37,7 @@ test:
     - venv-kernel --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/bjoseru/venv-kernel
